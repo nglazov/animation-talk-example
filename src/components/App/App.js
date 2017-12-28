@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import {Controls} from '../Controls/Controls';
+import {Surface} from '../Surface/Surface';
+import {SHAPES} from '../../svgPaths';
 
 class App extends Component {
     state = {
@@ -21,6 +23,11 @@ class App extends Component {
         return (
             <div className="App">
                 <Controls handleChange={this.handleControlChange} progress={this.state.progress}/>
+                <Surface>
+                    <g>
+                        <path d={SHAPES.ELEPHANT} fill={'#000'}></path>
+                    </g>
+                </Surface>
             </div>
         );
     }

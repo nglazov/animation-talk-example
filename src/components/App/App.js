@@ -34,13 +34,20 @@ class App extends Component {
         return (
             <div className="App">
                 <Controls handleChange={this.handleControlChange} progress={progress}/>
-                    <Surface>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                    <Surface customStyles={{width: '400px'}}>
                         <SvgPath
                             fill={App.getColor(easeQuad(this.getNormalizedProgress()))}
                             d={SHAPES.FLY}
                         />
                     </Surface>
-
+                    <Surface customStyles={{width: '400px'}}>
+                        <SvgPath
+                            fill={App.getColor(this.getNormalizedProgress())}
+                            d={SHAPES.FLY}
+                        />
+                    </Surface>
+                </div>
             </div>
         );
     }

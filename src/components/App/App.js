@@ -20,10 +20,6 @@ class App extends Component {
         })
     };
 
-    handleControlChange = (e) => {
-        this.updateProgress(parseInt(e.target.value, 10));
-    };
-
     getNormalizedProgress = ()=>{
         return this.state.progress / 100;
     };
@@ -36,7 +32,7 @@ class App extends Component {
         const {progress} = this.state;
         return (
             <div className="App">
-                <Controls handleChange={this.handleControlChange} progress={progress}/>
+                <Controls handleChange={this.updateProgress} progress={progress}/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
                     <Surface customStyles={{width: '400px'}}>
                         <SvgPath

@@ -6,7 +6,8 @@ import {Surface} from '../Surface/Surface';
 import {SvgPath} from '../SvgPath/SvgPath';
 import {SHAPES} from '../../svgPaths';
 import {interpolate} from 'd3-interpolate';
-import {easeQuad} from 'd3-ease';
+import {easeExpIn} from 'd3-ease';
+import {interpolate as flubberInterpolate} from 'flubber';
 
 class App extends Component {
     state = {
@@ -29,7 +30,7 @@ class App extends Component {
 
     static getColor = interpolate('#f00', '#00f');
 
-    static getD = interpolate(SHAPES.FLY, SHAPES.ELEPHANT);
+    static getD = flubberInterpolate(SHAPES.FLY, SHAPES.ELEPHANT, {maxSegmentLength: 3});
 
     render() {
         const {progress} = this.state;
@@ -39,8 +40,8 @@ class App extends Component {
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
                     <Surface customStyles={{width: '400px'}}>
                         <SvgPath
-                            fill={App.getColor(easeQuad(this.getNormalizedProgress()))}
-                            d={App.getD(easeQuad(this.getNormalizedProgress()))}
+                            fill={App.getColor(easeExpIn(this.getNormalizedProgress()))}
+                            d={App.getD(easeExpIn(this.getNormalizedProgress()))}
                         />
                     </Surface>
                     <Surface customStyles={{width: '400px'}}>

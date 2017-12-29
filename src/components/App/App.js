@@ -29,6 +29,8 @@ class App extends Component {
 
     static getColor = interpolate('#f00', '#00f');
 
+    static getD = interpolate(SHAPES.FLY, SHAPES.ELEPHANT);
+
     render() {
         const {progress} = this.state;
         return (
@@ -38,13 +40,13 @@ class App extends Component {
                     <Surface customStyles={{width: '400px'}}>
                         <SvgPath
                             fill={App.getColor(easeQuad(this.getNormalizedProgress()))}
-                            d={SHAPES.FLY}
+                            d={App.getD(easeQuad(this.getNormalizedProgress()))}
                         />
                     </Surface>
                     <Surface customStyles={{width: '400px'}}>
                         <SvgPath
                             fill={App.getColor(this.getNormalizedProgress())}
-                            d={SHAPES.FLY}
+                            d={App.getD(this.getNormalizedProgress())}
                         />
                     </Surface>
                 </div>

@@ -5,6 +5,7 @@ import {Controls} from '../Controls/Controls';
 import {Surface} from '../Surface/Surface';
 import {SvgPath} from '../SvgPath/SvgPath';
 import {SHAPES} from '../../svgPaths';
+import {interpolate} from 'd3-interpolate';
 
 class App extends Component {
     state = {
@@ -25,6 +26,8 @@ class App extends Component {
         return this.state.progress / 100;
     };
 
+    static getColor = interpolate('#f00', '#00f');
+
     render() {
         const {progress} = this.state;
         return (
@@ -32,6 +35,7 @@ class App extends Component {
                 <Controls handleChange={this.handleControlChange} progress={progress}/>
                     <Surface>
                         <SvgPath
+                            fill={App.getColor(this.getNormalizedProgress())}
                             d={SHAPES.FLY}
                         />
                     </Surface>

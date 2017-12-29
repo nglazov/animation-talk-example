@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 export class SvgPath extends React.Component {
     render() {
-        const {d} = this.props;
+        const {d, fill} = this.props;
         return (
             <path
-                fill={'#000'}
+                fill={fill}
                 d={d}
             />
         );
@@ -14,5 +14,6 @@ export class SvgPath extends React.Component {
 }
 
 SvgPath.propTypes = {
-    d: PropTypes.string
+    d: PropTypes.string,
+    fill: PropTypes.string
 };

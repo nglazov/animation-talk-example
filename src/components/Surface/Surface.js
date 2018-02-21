@@ -6,10 +6,8 @@ export const Surface = (props) => {
     const paddingBottom = `${Math.round(viewBox.height / viewBox.width * 100)}%`;
 
     const divStyle = {
-        position: 'relative',
         width: '100%',
         height: '0px',
-        paddingBottom,
         ...customStyles
     };
 
@@ -21,24 +19,30 @@ export const Surface = (props) => {
         top: 0
     };
 
+    const adaptiveStyle = {
+        position: 'relative',
+        paddingBottom
+    };
+
     const svgViewBox = `0 0 ${viewBox.width} ${viewBox.height}`;
 
     return (
         <div
             style={divStyle}
             {...other}>
-            <svg
-                viewBox={svgViewBox}
-                style={svgStyle}
-                preserveAspectRatio={'xMidYMid'}>
-                {children}
-            </svg>
+            <div style={adaptiveStyle}>
+                <svg
+                    viewBox={svgViewBox}
+                    style={svgStyle}>
+                    {children}
+                </svg>
+            </div>
         </div>
     );
 };
 
 Surface.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+    children: PropTypes.oneOf(PropTypes.node, PropTypes.arrayOf(PropTypes.node)),
     viewBox: PropTypes.object,
     customStyles: PropTypes.object
 };

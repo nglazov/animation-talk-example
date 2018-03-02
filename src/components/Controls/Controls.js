@@ -3,32 +3,33 @@ import PropTypes from 'prop-types';
 
 export class Controls extends React.Component {
     animate = ()=>{
-        const {progress} = this.props;
-        if (progress > 99) {
+        const {value, maxValue} = this.props;
+
+        if (value >= maxValue) {
             return;
         }
 
-        this.props.handleChange(progress + 1);
-        requestAnimationFrame(this.animate)
+        this.props.handleChange(value + 1);
+        requestAnimationFrame(this.animate);
     };
 
     handleInputChange = (e) => {
-        this.props.handleChange(parseInt(e.target.value, 10))
+        this.props.handleChange(parseInt(e.currentTarget.value, 10))
     };
 
     render() {
-        const {progress} = this.props;
+        const {value, maxValue} = this.props;
 
         return (
             <div>
-                <span onClick={this.animate}>play</span>
+                <button onClick={this.animate}>play</button>
                 <input
                     type="range"
                     min={0}
-                    max={100}
-                    value={progress}
+                    max={maxValue}
+                    value={value}
                     onChange={this.handleInputChange}/>
-                <span>{progress}</span>
+                <span>{value}</span>
             </div>
         );
     }
@@ -36,5 +37,6 @@ export class Controls extends React.Component {
 
 Controls.propTypes = {
     handleChange: PropTypes.func.isRequired,
-    progress: PropTypes.number.isRequired
+    value: PropTypes.number.isRequired,
+    maxValue: PropTypes.number.isRequired
 };

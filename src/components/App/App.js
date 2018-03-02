@@ -9,41 +9,45 @@ import {interpolate} from 'd3-interpolate';
 import {easeExpIn} from 'd3-ease';
 import {interpolate as flubberInterpolate} from 'flubber';
 
+const MAX_VALUE = 150;
+
 class App extends Component {
     state = {
-        progress: 0
+        value: 0
     };
 
-    updateProgress = (progress) => {
+    updateValue = (value) => {
         this.setState({
-            progress
+            value
         })
     };
 
-    getNormalizedProgress = ()=>{
-        return this.state.progress / 100;
+    get progress() {
+        return this.state.value / MAX_VALUE;
     };
 
-    static getColor = interpolate('#f00', '#00f');
+    static getFill = interpolate('#f00', '#00f');
 
-    static getD = flubberInterpolate(SHAPES.FLY, SHAPES.ELEPHANT, {maxSegmentLength: 3});
+    static getD = flubberInterpolate(SHAPES.FLY, SHAPES.ELEPHANT, {maxSegmentLength: 1});
 
     render() {
-        const {progress} = this.state;
         return (
             <div className="App">
-                <Controls handleChange={this.updateProgress} progress={progress}/>
+                <Controls
+                    handleChange={this.updateValue}
+                    value={this.state.value}
+                    maxValue={MAX_VALUE}/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
                     <Svg customStyles={{width: '400px'}}>
                         <SvgPath
-                            fill={App.getColor(easeExpIn(this.getNormalizedProgress()))}
-                            d={App.getD(easeExpIn(this.getNormalizedProgress()))}
+                            fill={App.getFill(this.progress)}
+                            d={App.getD(this.progress)}
                         />
                     </Svg>
                     <Svg customStyles={{width: '400px'}}>
                         <SvgPath
-                            fill={App.getColor(this.getNormalizedProgress())}
-                            d={App.getD(this.getNormalizedProgress())}
+                            fill={App.getFill(this.progress)}
+                            d={App.getD(easeBack(this.progress))}
                         />
                     </Svg>
                 </div>

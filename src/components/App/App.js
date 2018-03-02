@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import {interpolate} from 'd3-interpolate';
+import {interpolate as flubberInterpolate} from 'flubber';
+import {easeBack} from 'd3-ease';
 
-import './App.css';
-import {Controls} from '../Controls/Controls';
 import {Svg} from '../Svg/Svg';
 import {SvgPath} from '../SvgPath/SvgPath';
-import {SHAPES} from '../../svgPaths';
-import {interpolate} from 'd3-interpolate';
-import {easeExpIn} from 'd3-ease';
-import {interpolate as flubberInterpolate} from 'flubber';
+import {SHAPES} from '../../svgShapes';
+import {Controls} from '../Controls/Controls';
+
+import './App.css';
 
 const MAX_VALUE = 150;
 

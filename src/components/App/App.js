@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import './App.css';
 import {Controls} from '../Controls/Controls';
-import {Surface} from '../Surface/Surface';
+import {Svg} from '../Svg/Svg';
 import {SvgPath} from '../SvgPath/SvgPath';
 import {SHAPES} from '../../svgPaths';
 import {interpolate} from 'd3-interpolate';
@@ -34,18 +34,18 @@ class App extends Component {
             <div className="App">
                 <Controls handleChange={this.updateProgress} progress={progress}/>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-                    <Surface customStyles={{width: '400px'}}>
+                    <Svg customStyles={{width: '400px'}}>
                         <SvgPath
                             fill={App.getColor(easeExpIn(this.getNormalizedProgress()))}
                             d={App.getD(easeExpIn(this.getNormalizedProgress()))}
                         />
-                    </Surface>
-                    <Surface customStyles={{width: '400px'}}>
+                    </Svg>
+                    <Svg customStyles={{width: '400px'}}>
                         <SvgPath
                             fill={App.getColor(this.getNormalizedProgress())}
                             d={App.getD(this.getNormalizedProgress())}
                         />
-                    </Surface>
+                    </Svg>
                 </div>
             </div>
         );

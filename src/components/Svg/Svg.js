@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Surface = (props) => {
+export const Svg = (props) => {
     const {viewBox, customStyles, children, ...other} = props;
     const paddingBottom = `${Math.round(viewBox.height / viewBox.width * 100)}%`;
 
@@ -41,12 +41,12 @@ export const Surface = (props) => {
     );
 };
 
-Surface.propTypes = {
+Svg.propTypes = {
     children: PropTypes.oneOf(PropTypes.node, PropTypes.arrayOf(PropTypes.node)),
     viewBox: PropTypes.object,
     customStyles: PropTypes.object
 };
 
-Surface.defaultProps = {
+Svg.defaultProps = {
     viewBox: {width: 300, height: 200}
 };
